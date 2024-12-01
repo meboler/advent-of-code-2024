@@ -1,4 +1,5 @@
 '''Solution to Day 1'''
+from typing import List, Dict
 import numpy as np
 
 def part1() -> None:
@@ -22,8 +23,10 @@ def part2() -> None:
     data = np.loadtxt('input.txt', dtype=int)
     
     # 2. Convert lists to dictionaries
-    def list_to_occurrence_dict(x):
-        '''Take a list and return a dictionary where the keys are the unique elements of the list and the values are the number of times the element appears'''
+    def list_to_occurrence_dict(x: List) -> Dict:
+        '''Take a list and return a dictionary where the keys are the unique 
+        elements of the list and the values are the number of times the element
+        appears'''
         vals, counts = np.unique(x, return_counts=True)
         return dict(zip(vals, counts))
     d1 = list_to_occurrence_dict(data[:, 0])
