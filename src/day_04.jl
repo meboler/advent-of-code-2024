@@ -16,7 +16,6 @@ end
 function solve_part1(data)
     WORD = "XMAS" # The word we're trying to match
     width, height = size(data) # Bounds of our search grid
-    print(size(data))
 
     function line_search(data, word, i, j, di, dj)
         # Build indices
