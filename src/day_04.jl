@@ -62,7 +62,6 @@ function solve_part1(data)
             if found
                 count += 1
             end
-
         end
         return count
     end
@@ -83,9 +82,14 @@ function solve_part2(data)
         # M.S
         # .A.
         # M.S
-        height, width = size(data)
+        
+        # Short-circuit: data[i, j] _must_ be an A
+        if !isequal(data[i, j], 'A')
+            return false
+        end
 
         # Make sure square to search is in the grid
+        height, width = size(data)
         is_row_valid = ((i - 1) >= 1) & ((i + 1) <= height)
         is_col_valid = ((j - 1) >= 1) & ((j + 1) <= width)
         if !(is_row_valid & is_col_valid)
@@ -100,12 +104,13 @@ function solve_part2(data)
         second_line_idxs = CartesianIndex.([i+1, i, i-1], [j-1, j, j+1])
         l2 = String(data[second_line_idxs])
         
-        # Match forwards and backwards
+        # Match forwards or backwards
         is_match(line) = isequal(line, "MAS") | isequal(reverse(line), "MAS")
         
         return is_match(l1) & is_match(l2)
     end
-
+    
+    # Now just search each square
     height, width = size(data)
     count = 0
     for i = 1 : height
